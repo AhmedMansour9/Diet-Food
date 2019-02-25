@@ -28,10 +28,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+
+import com.dietfoooood.R;
 import com.example.shosho.dietfood.GPSTracker;
 import com.example.shosho.dietfood.Gbs;
 import com.example.shosho.dietfood.NetworkConnection;
-import com.example.shosho.dietfood.R;
 import com.example.shosho.dietfood.SplashActivity;
 import com.example.shosho.dietfood.activity.ChangePasswordActivity;
 import com.example.shosho.dietfood.activity.CheckoutUIActivity;
@@ -85,8 +86,8 @@ public class PostOrderFragment extends Fragment implements PostOrderView
     private GoogleMap googleMap;
     double latitude,longitude;
     List<Address> addresses;
-    String addres;
-    EditText ET_address;
+    String addres,Cities;
+    EditText ET_address,E_City,E_State;
     Gbs e;
     GPSTracker gbs;
 
@@ -125,23 +126,13 @@ View view;
             @Override
             public void onClick(View view) {
                 performOrder();
-                Intent i = new Intent(getActivity(),CheckoutUIActivity.class);
-                startActivity(i);
-                ((Activity) getActivity()).overridePendingTransition(0,0);
+
+
             }
         });
-       /* assignLocationBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               //getLocation();
-            }
-        });*/
-
         e=new Gbs();
        //get_Intent();
         GetLocation();
-        //T_Price.setText(price);
-        //order();
 
         int SDK_INT = android.os.Build.VERSION.SDK_INT;
         if (SDK_INT > 8) {
@@ -161,22 +152,6 @@ View view;
     }
 
 
-
-    /*private void getLocation() {
-        FUtilsValidation.isEmpty( userPhone,( "من فضلك اترك رقم الجوال!" ));
-        FUtilsValidation.isEmpty( userAddress,( "من فضلك اكتب العنوان!"));
-        if (networkConnection.isNetworkAvailable(getContext()))
-        {
-            if(!userPhone.getText().toString().equals("")&&
-                    !userAddress.getText().toString().equals("")) {
-                User user=new User();
-                user.setUserToken(SplashActivity.Login);
-                user.setPhone(userPhone.getText().toString());
-                user.setAddress(userAddress.getText().toString());
-                postOrderPresenter.getPostOrderResult(user);
-            }
-        }
-    }*/
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -213,6 +188,8 @@ View view;
     private void performOrder() {
         FUtilsValidation.isEmpty( userPhone,( "من فضلك اترك رقم الجوال!" ));
         FUtilsValidation.isEmpty( userAddress,( "من فضلك اكتب العنوان!"));
+        FUtilsValidation.isEmpty( E_City,( "من فضلك ادخل المدينة!"));
+        FUtilsValidation.isEmpty( E_State,( "من فضلك ادخل الحي!"));
         if (networkConnection.isNetworkAvailable(getContext()))
         {
             if(SplashActivity.Login==null){
@@ -222,26 +199,42 @@ View view;
                 ((Activity) getActivity()).overridePendingTransition(0,0);
             }
             if(!userPhone.getText().toString().equals("")&&
-                    !userAddress.getText().toString().equals("")) {
+                    !userAddress.getText().toString().equals("")
+                    &&
+                    !E_City.getText().toString().equals("")
+                    &&
+                    !E_State.getText().toString().equals("")) {
+
+
                 User user=new User();
                 user.setUserToken(SplashActivity.Login);
                 user.setPhone(userPhone.getText().toString());
                 user.setAddress(userAddress.getText().toString());
+                user.setState(E_State.getText().toString());
+                user.setCity(E_City.getText().toString());
+                user.setLat(String.valueOf(latitude));
+                user.setLng(String.valueOf(longitude));
                 postOrderPresenter.getPostOrderResult(user);
             }
         }
     }
     private void init() {
-        userPhone=view.findViewById(R.id.post_order_edit_text_phone);
-        userAddress=view.findViewById(R.id.post_order_edit_text_address);
+        userPhone=view.findViewById(R.id.post_order_edit_Phone);
+        userAddress=view.findViewById(R.id.street);
         assignLocationBtn=view.findViewById(R.id.post_order_btn_asign_location);
         orderBtn=view.findViewById(R.id.post_order_btn_add_order);
-        ET_address=view.findViewById(R.id.post_order_edit_text_address);
+        ET_address=view.findViewById(R.id.street);
+        E_City=view.findViewById(R.id.city);
+        E_State=view.findViewById(R.id.state);
     }
 
     @Override
     public void showPostOrderResult(String Message) {
-        Toast.makeText(getContext(), Message, Toast.LENGTH_SHORT).show();
+        Intent inty=new Intent(getActivity(),CheckoutUIActivity.class);
+        inty.putExtra("price",TotalPrice);
+        startActivity(inty);
+
+
     }
 
     @Override
@@ -306,7 +299,9 @@ View view;
             Geocoder geocoder = new Geocoder(getContext());
             addresses = geocoder.getFromLocation(latitude, longitude, 1);
             addres = addresses.get(0).getAddressLine(0);
+            Cities = addresses.get(0).getAdminArea();
             ET_address.setText(addres + "");
+            E_City.setText(Cities);
 
         } catch (IOException d) {
             d.printStackTrace();
@@ -320,20 +315,6 @@ View view;
                 != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
                     Manifest.permission.ACCESS_FINE_LOCATION)) {
-                new android.app.AlertDialog.Builder(getContext())
-                        .setTitle("السماحية:")
-                        .setMessage("افتح الGPS")
-                        .setPositiveButton("موافق", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                //Prompt the user once explanation has been shown
-                                ActivityCompat.requestPermissions(getActivity(),
-                                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                                        REQUEST_LOCATION_CODE);
-                            }
-                        })
-                        .create()
-                        .show();
 
 
             } else {

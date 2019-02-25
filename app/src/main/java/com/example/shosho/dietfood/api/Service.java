@@ -13,6 +13,7 @@ import com.example.shosho.dietfood.model.OrderDetailsResponse;
 import com.example.shosho.dietfood.model.PackageDetailsResponse;
 import com.example.shosho.dietfood.model.PaidConsultationResponse;
 import com.example.shosho.dietfood.model.PostOrderResponse;
+import com.example.shosho.dietfood.model.StoreDataResponse;
 import com.example.shosho.dietfood.model.SubscribtionResponse;
 import com.example.shosho.dietfood.model.home.HomeBannerResponse;
 import com.example.shosho.dietfood.model.home.HomeProductResponse;
@@ -78,6 +79,9 @@ public interface Service {
 
     @POST("postOrder")
     Call<PostOrderResponse> getPostOrderData(@Body Map<String,String> map);
+
+    @POST("storeData")
+    Call<StoreDataResponse> getPostOrder(@Body Map<String,String> map);
 
     @POST("consultings")
     Call<PaidConsultationResponse> getPaidConsultationData(@Body Map<String,String> map);

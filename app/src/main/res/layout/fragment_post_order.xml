@@ -5,10 +5,7 @@
     android:layout_height="match_parent"
     android:background="#fff"
     android:clickable="true"
-
     tools:context=".fragment.PostOrderFragment">
-
-    <!-- TODO: Update blank fragment layout -->
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/post_order_toolbar"
@@ -46,12 +43,32 @@
         <ImageView
             android:id="@+id/post_order_image"
             android:layout_below="@+id/post_order_toolbar"
-            android:layout_width="@dimen/_84sdp"
-            android:layout_height="@dimen/_84sdp"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/_50sdp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/_17sdp"
             android:background="@drawable/logo"
             />
+
+      <RelativeLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/relative_country"
+          android:layout_below="@+id/post_order_image"
+          android:layout_marginTop="@dimen/_10sdp">
+        <TextView
+            android:id="@+id/country"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="السعودية"
+            android:textColor="#706e6f"
+            android:layout_centerHorizontal="true"
+            android:textSize="@dimen/_18sdp"
+            />
+
+
+    </RelativeLayout>
+
 
         <RelativeLayout
             android:id="@+id/relative_phone"
@@ -60,25 +77,18 @@
             android:layout_below="@id/post_order_image"
             android:layout_marginTop="@dimen/_32sdp"
             >
-            <ImageView
-                android:id="@+id/post_order_icon_phone"
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/_10sdp"
-                android:src="@drawable/telephone"/>
+
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/text_layout_phone"
+                android:id="@+id/text_layout_street"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/post_order_icon_phone"
-                android:layout_marginLeft="@dimen/_13sdp"
-                android:layout_marginRight="@dimen/_13sdp"
-                android:hint="رقم الجوال" >
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginRight="@dimen/_20sdp"
+                android:hint="العنوان" >
 
                 <EditText
-                    android:id="@+id/post_order_edit_text_phone"
+                    android:id="@+id/street"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingRight="@dimen/_10sdp"
@@ -88,33 +98,23 @@
         </RelativeLayout>
 
         <RelativeLayout
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/relative_address"
+            android:id="@+id/relative_city"
             android:layout_below="@+id/relative_phone"
-            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp">
 
-            >
-            <ImageView
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
-                android:src="@drawable/facebook_placeholder"
-                android:layout_marginLeft="@dimen/_10sdp"
-                android:id="@+id/post_order_icon_address"
-                android:layout_centerVertical="true"/>
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/text_layout_address"
+                android:id="@+id/text_layout_city"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/post_order_icon_address"
-                android:hint="العنوان"
-                android:layout_marginLeft="@dimen/_13sdp"
-                android:layout_marginRight="@dimen/_13sdp"
+                android:hint="المدينة"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginRight="@dimen/_20sdp"
                 >
 
                 <EditText
-                    android:id="@+id/post_order_edit_text_address"
+                    android:id="@+id/city"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
@@ -123,17 +123,73 @@
             </android.support.design.widget.TextInputLayout>
         </RelativeLayout>
 
-        <Button
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/relative_state"
+        android:layout_below="@+id/relative_city"
+        android:layout_marginTop="@dimen/_10sdp">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/text_layout_state"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="الحي"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginRight="@dimen/_20sdp"
+            >
+
+            <EditText
+                android:id="@+id/state"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textColor="#706e6f"
+                />
+        </android.support.design.widget.TextInputLayout>
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/relative_address"
+        android:layout_below="@+id/relative_state"
+        android:layout_marginTop="@dimen/_10sdp">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/text_layout_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="رقم التليفون"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginRight="@dimen/_20sdp">
+
+            <EditText
+                android:id="@+id/post_order_edit_Phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textColor="#706e6f"
+                />
+
+        </android.support.design.widget.TextInputLayout>
+
+
+    </RelativeLayout>
+
+
+    <Button
             android:id="@+id/post_order_btn_asign_location"
             android:layout_width="@dimen/_97sdp"
             android:layout_height="@dimen/_32sdp"
             android:background="@drawable/button_login"
-            android:layout_marginTop="@dimen/_42sdp"
+            android:layout_marginTop="@dimen/_20sdp"
             android:layout_centerHorizontal="true"
             android:textSize="@dimen/_15sdp"
             android:textColor="#fff"
             android:text="تحديد موقعى"
-            android:layout_marginBottom="@dimen/_32sdp"
             android:layout_below="@id/relative_address"
             />
 
@@ -142,7 +198,7 @@
             android:layout_width="@dimen/_97sdp"
             android:layout_height="@dimen/_32sdp"
             android:background="@drawable/button_login"
-            android:layout_marginTop="@dimen/_4sdp"
+            android:layout_marginTop="@dimen/_20sdp"
             android:layout_centerHorizontal="true"
             android:textSize="@dimen/_15sdp"
             android:textColor="#fff"

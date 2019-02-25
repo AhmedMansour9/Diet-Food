@@ -7,6 +7,11 @@ import android.util.Log;
 
 import com.example.shosho.dietfood.common.Constants;
 
+import org.json.JSONObject;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -19,6 +24,7 @@ import java.net.URLEncoder;
 public class PaymentStatusRequestAsyncTask extends AsyncTask<String, Void, String> {
 
     private PaymentStatusRequestListener listener;
+    StringBuilder result = new StringBuilder();
 
     public PaymentStatusRequestAsyncTask(PaymentStatusRequestListener listener) {
         this.listener = listener;
@@ -56,39 +62,51 @@ public class PaymentStatusRequestAsyncTask extends AsyncTask<String, Void, Strin
         if (resourcePath == null) {
             return null;
         }
-
         URL url;
         String urlString;
         HttpURLConnection connection = null;
         String paymentStatus = null;
 
         try {
-            urlString = Constants.BASE_URL + "/status?resourcePath=" +
-                    URLEncoder.encode(resourcePath, "UTF-8");
-
-            Log.d(Constants.LOG_TAG, "Status request url: " + urlString);
-
+            urlString = Constants.BASE_URL + "/paymentId?" +
+                    "id=" + CheckoutIdRequestAsyncTask.checkoutId+
+                    "&userId=" + "8ac7a4c8686138d701686fad36ce11a4" +
+                    "&password=" + "kejWhw4yhN" +
+                    "&entityId=" +"8ac7a4c8686138d701686fad698011ae";
             url = new URL(urlString);
             connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("POST");
             connection.setConnectTimeout(Constants.CONNECTION_TIMEOUT);
+//            JsonReader jsonReader = new JsonReader(
+//                    new InputStreamReader(connection.getInputStream()));
+//            jsonReader.beginObject();
+//            while (jsonReader.hasNext()) {
+//                if (jsonReader.nextName().equals("result")) {
+//                    paymentStatus = jsonReader.nextString();
+//                } else {
+//                    jsonReader.skipValue();
+//                }
+//            }
 
-            JsonReader jsonReader = new JsonReader(
-                    new InputStreamReader(connection.getInputStream(), "UTF-8"));
+//            jsonReader.endObject();
+//            jsonReader.close();
+            if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
 
-            jsonReader.beginObject();
-
-            while (jsonReader.hasNext()) {
-                if (jsonReader.nextName().equals("paymentResult")) {
-                    paymentStatus = jsonReader.nextString();
-                } else {
-                    jsonReader.skipValue();
-                }
+            InputStream in = new BufferedInputStream(connection.getInputStream());
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                result.append(line);
             }
+            String json = result.toString();
+            JSONObject jObj = new JSONObject(json);
+            JSONObject a=jObj.getJSONObject("result");
+                paymentStatus=a.getString("code");
+            reader.close();
+        }
 
-            jsonReader.endObject();
-            jsonReader.close();
 
-            Log.d(Constants.LOG_TAG, "Status: " + paymentStatus);
+        Log.d(Constants.LOG_TAG, "Status: " + paymentStatus);
         } catch (Exception e) {
             Log.e(Constants.LOG_TAG, "Error: ", e);
         } finally {

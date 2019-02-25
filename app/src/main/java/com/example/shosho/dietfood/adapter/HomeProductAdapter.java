@@ -11,8 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.dietfoooood.R;
 import com.example.shosho.dietfood.model.home.HomeProductData;
-import com.example.shosho.dietfood.R;
 import com.example.shosho.dietfood.view.DetailsHomeProductView;
 
 import java.util.List;

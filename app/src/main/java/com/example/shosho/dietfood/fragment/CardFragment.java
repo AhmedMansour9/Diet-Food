@@ -19,8 +19,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dietfoooood.R;
+import com.example.shosho.dietfood.Language;
 import com.example.shosho.dietfood.NetworkConnection;
-import com.example.shosho.dietfood.R;
 import com.example.shosho.dietfood.SplashActivity;
 import com.example.shosho.dietfood.activity.HomeActivity;
 import com.example.shosho.dietfood.activity.LoginActivity;
@@ -84,7 +85,7 @@ public class CardFragment extends Fragment implements CardView ,AddToCardView
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        // Inflate the layout for t his fragment
         view= inflater.inflate( R.layout.fragment_card, container, false );
         init();
         networkConnection=new NetworkConnection(getContext());
@@ -145,12 +146,19 @@ public class CardFragment extends Fragment implements CardView ,AddToCardView
             TotalPrice += cardDataList.get( i ).getTotalPrice() ;
         }
         textTotalPrice.setText(String.valueOf(  TotalPrice)  );*/
-           TabLayout.Tab tab = HomeActivity.tabLayout.getTabAt(1); // fourth tab
-           View tabView = tab.getCustomView();
-           TextView textView = tabView.findViewById(R.id.cart_notification);
-           textView.setVisibility(View.VISIBLE);
-           textView.setText(cardDataList.size() + "");
-
+        if(Language.isRTL()) {
+            TabLayout.Tab tab = HomeActivity.tabLayout.getTabAt(2); // fourth tab
+            View tabView = tab.getCustomView();
+            TextView textView = tabView.findViewById(R.id.cart_notification);
+            textView.setVisibility(View.VISIBLE);
+            textView.setText(cardDataList.size() + "");
+        }else {
+            TabLayout.Tab tab = HomeActivity.tabLayout.getTabAt(1); // fourth tab
+            View tabView = tab.getCustomView();
+            TextView textView = tabView.findViewById(R.id.cart_notification);
+            textView.setVisibility(View.VISIBLE);
+            textView.setText(cardDataList.size() + "");
+        }
 
            cardAdapter = new CardAdapter(getContext(), cardDataList);
            cardAdapter.onClick((DetailsCardView) this);
@@ -177,12 +185,23 @@ public class CardFragment extends Fragment implements CardView ,AddToCardView
         totalPricerelativeLayout.setVisibility(View.GONE);
         paymentBtn.setVisibility(View.GONE);
 
+        if(Language.isRTL()) {
+
+            TabLayout.Tab tab = HomeActivity.tabLayout.getTabAt(2); // fourth tab
+            View tabView = tab.getCustomView();
+            TextView textView = tabView.findViewById(R.id.cart_notification);
+            textView.setVisibility(View.GONE);
+
+        }else {
 
             TabLayout.Tab tab = HomeActivity.tabLayout.getTabAt(1); // fourth tab
             View tabView = tab.getCustomView();
             TextView textView = tabView.findViewById(R.id.cart_notification);
             textView.setVisibility(View.GONE);
-        Toast.makeText(getContext(), "السله فارغة!", Toast.LENGTH_SHORT).show();
+
+
+        }
+
 
     }
 
@@ -194,10 +213,8 @@ public class CardFragment extends Fragment implements CardView ,AddToCardView
         int Price=(int)price;
         bundle.putString( "totalPrice",String.valueOf(Price));
         postOrderFragment.setArguments(bundle);
-        getFragmentManager().beginTransaction().add(R.id.card_frame_container,postOrderFragment)
-                .addToBackStack(null).commit();
         getFragmentManager().beginTransaction().replace(R.id.card_frame_container
-                ,new PostOrderFragment()).addToBackStack(null).commit();
+                ,postOrderFragment).addToBackStack(null).commit();
     }
 
 

@@ -13,7 +13,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.shosho.dietfood.R;
+
+import com.dietfoooood.R;
 import com.example.shosho.dietfood.SplashActivity;
 import com.example.shosho.dietfood.adapter.MealComponentAdapter;
 import com.example.shosho.dietfood.adapter.MyOrdersDetailsAdapter;

@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.shosho.dietfood.R;
+import com.dietfoooood.R;
 import com.example.shosho.dietfood.model.MyOrdersData;
 import com.example.shosho.dietfood.model.MySubscribtionData;
 import com.example.shosho.dietfood.view.OnClickOrderDetailsView;

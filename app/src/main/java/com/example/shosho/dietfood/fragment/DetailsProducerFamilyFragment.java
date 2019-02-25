@@ -20,7 +20,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.shosho.dietfood.R;
+
+import com.dietfoooood.R;
 import com.example.shosho.dietfood.SplashActivity;
 import com.example.shosho.dietfood.activity.HomeActivity;
 import com.example.shosho.dietfood.activity.LoginActivity;

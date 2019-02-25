@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.shosho.dietfood.R;
+import com.dietfoooood.R;
 import com.example.shosho.dietfood.model.ProducerFamilyData;
 import com.example.shosho.dietfood.view.DetailsProducerFamilyView;
 

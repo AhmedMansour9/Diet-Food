@@ -13,7 +13,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.shosho.dietfood.R;
+
+import com.dietfoooood.R;
 import com.example.shosho.dietfood.presenter.PackageDetailsPresenter;
 
 /**

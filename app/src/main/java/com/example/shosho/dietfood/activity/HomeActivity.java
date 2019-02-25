@@ -17,7 +17,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.shosho.dietfood.R;
+import com.dietfoooood.R;
+import com.example.shosho.dietfood.Language;
 import com.example.shosho.dietfood.SplashActivity;
 import com.example.shosho.dietfood.adapter.CardAdapter;
 import com.example.shosho.dietfood.fragment.CardFragment;
@@ -66,7 +67,11 @@ public class HomeActivity extends AppCompatActivity implements CardView {
       cardPresenter.getCardList(UserToken);
         setupTabIcons();
 
-
+        if(Language.isRTL()) {
+            tabLayout.getTabAt(3).select();
+        }else {
+            tabLayout.getTabAt(0).select();
+        }
 
     }
 
@@ -78,10 +83,19 @@ public class HomeActivity extends AppCompatActivity implements CardView {
 
         View view3=getLayoutInflater().inflate( R.layout.tab_icon_my_orders,null );
         View view4=getLayoutInflater().inflate( R.layout.tab_icon_profile,null );
-        tabLayout.getTabAt( 0 ).setCustomView( view1 );
-        tabLayout.getTabAt( 1 ).setCustomView( view2 );
-        tabLayout.getTabAt( 2 ).setCustomView( view3 );
-        tabLayout.getTabAt( 3).setCustomView( view4 );
+
+
+        if(Language.isRTL()){
+            tabLayout.getTabAt(0).setCustomView(view4);
+            tabLayout.getTabAt(1).setCustomView(view3);
+            tabLayout.getTabAt(2).setCustomView(view2);
+            tabLayout.getTabAt(3).setCustomView(view1);
+        }else {
+            tabLayout.getTabAt( 0 ).setCustomView( view1 );
+            tabLayout.getTabAt( 1 ).setCustomView( view2 );
+            tabLayout.getTabAt( 2 ).setCustomView( view3 );
+            tabLayout.getTabAt( 3).setCustomView( view4 );
+        }
     }
     public void onSelectedTab(){
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -118,11 +132,21 @@ public class HomeActivity extends AppCompatActivity implements CardView {
     }
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter viewPagerAdapter=new ViewPagerAdapter(getSupportFragmentManager());
-        viewPagerAdapter.addFrag( new HomeFragment(),"" );
-        viewPagerAdapter.addFrag( new CardFragment(),"" );
-        viewPagerAdapter.addFrag( new MyOrdersFragment(),"" );
-        viewPagerAdapter.addFrag( new ProfileFragment(),"" );
 
+
+        if(Language.isRTL()){
+            viewPagerAdapter.addFrag( new ProfileFragment(),"" );
+            viewPagerAdapter.addFrag( new MyOrdersFragment(),"" );
+            viewPagerAdapter.addFrag( new CardFragment(),"" );
+            viewPagerAdapter.addFrag( new HomeFragment(),"" );
+
+        }else {
+            viewPagerAdapter.addFrag( new HomeFragment(),"" );
+            viewPagerAdapter.addFrag( new CardFragment(),"" );
+            viewPagerAdapter.addFrag( new MyOrdersFragment(),"" );
+            viewPagerAdapter.addFrag( new ProfileFragment(),"" );
+
+        }
         viewPager.setAdapter( viewPagerAdapter );
     }
 
@@ -134,13 +158,18 @@ public class HomeActivity extends AppCompatActivity implements CardView {
 
     @Override
     public void showCardList(List<CardData> cardDataList) {
-        if(cardDataList.size()>=0) {
-
-                TabLayout.Tab tab = tabLayout.getTabAt(1); // fourth tab
-                View tabView = tab.getCustomView();
-                textView = tabView.findViewById(R.id.cart_notification);
-                textView.setVisibility(View.VISIBLE);
-                textView.setText(cardDataList.size()+"");
+        if(Language.isRTL()) {
+            TabLayout.Tab tab = HomeActivity.tabLayout.getTabAt(2); // fourth tab
+            View tabView = tab.getCustomView();
+            TextView textView = tabView.findViewById(R.id.cart_notification);
+            textView.setVisibility(View.VISIBLE);
+            textView.setText(cardDataList.size() + "");
+        }else {
+            TabLayout.Tab tab = HomeActivity.tabLayout.getTabAt(1); // fourth tab
+            View tabView = tab.getCustomView();
+            TextView textView = tabView.findViewById(R.id.cart_notification);
+            textView.setVisibility(View.VISIBLE);
+            textView.setText(cardDataList.size() + "");
         }
     }
 

@@ -17,7 +17,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.shosho.dietfood.R;
 import com.example.shosho.dietfood.activity.HomeActivity;
 import com.example.shosho.dietfood.adapter.MealComponentAdapter;
 import com.example.shosho.dietfood.model.AddToCardData;

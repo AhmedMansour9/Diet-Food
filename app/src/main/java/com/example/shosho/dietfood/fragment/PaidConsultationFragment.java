@@ -13,8 +13,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+
+import com.dietfoooood.R;
 import com.example.shosho.dietfood.NetworkConnection;
-import com.example.shosho.dietfood.R;
 import com.example.shosho.dietfood.activity.CheckoutUIActivity;
 import com.example.shosho.dietfood.model.User;
 import com.example.shosho.dietfood.presenter.PaidConsultationPresenter;
@@ -58,7 +59,6 @@ View view;
         FUtilsValidation.isEmpty( userPhone,"من فضك,اكتب رقم التليفون الخاص بك" );
         FUtilsValidation.isEmpty( userEmail,"من فضلك, ادخل بريدك الالكترونى" );
         FUtilsValidation.isEmpty( userMsg,"من فضك,اترك رسالتك" );
-
         validateEmail();
         NetworkConnection networkConnection=new NetworkConnection( getContext() );
         if (networkConnection.isNetworkAvailable( getContext() ))
@@ -113,8 +113,10 @@ View view;
     @Override
     public void showPaidConsultationResult(String Msg) {
       //  Toast.makeText(getContext(), Msg, Toast.LENGTH_SHORT).show();
-        Toast.makeText(getContext(), "تم ارسال البيانات", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getContext(), "تم ارسال البيانات", Toast.LENGTH_SHORT).show();
+
         Intent i = new Intent(getActivity(),CheckoutUIActivity.class);
+        i.putExtra("price","120");
         startActivity(i);
         ((Activity) getActivity()).overridePendingTransition(0,0);
     }

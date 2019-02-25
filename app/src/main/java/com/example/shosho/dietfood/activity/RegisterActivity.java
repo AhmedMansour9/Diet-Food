@@ -20,8 +20,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.dietfoooood.R;
 import com.example.shosho.dietfood.NetworkConnection;
-import com.example.shosho.dietfood.R;
 import com.example.shosho.dietfood.model.User;
 import com.example.shosho.dietfood.presenter.RegisterPresenter;
 import com.example.shosho.dietfood.view.RegisterView;
@@ -127,26 +127,25 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
             {
                 Toast.makeText(this, "من فضلك ادخل كلمه المرور فيما لا يقل عن سته ارقام !", Toast.LENGTH_SHORT).show();
             }
-            if (!userName.getText().toString().equals( "" )&&
-                    !userPhone.getText().toString().equals( "" )&&
-                    !userEmail.getText().toString().equals( "" )&&
-                    !userAddress.getText().toString().equals( "" )&&
-                    !userPassword.getText().toString().equals( "" )&&
-                    FUtilsValidation.isLengthCorrect( userPassword.getText().toString(),6,16 )&&
-                    validateEmail()) {
-                User user=new User(  );
-                user.setBase64( encImage );
-                user.setName( userName.getText().toString() );
-                user.setPhone( userPhone.getText().toString() );
-                user.setEmail( userEmail.getText().toString() );
-                user.setAddress( userAddress.getText().toString() );
-                user.setPassword( userPassword.getText().toString() );
-                registerPresenter.getRegisterResult( user );
+          else if ( validateEmail()) {
+                if (!userName.getText().toString().equals("") &&
+                        !userPhone.getText().toString().equals("") &&
+                        !userEmail.getText().toString().equals("") &&
+                        !userAddress.getText().toString().equals("") &&
+                        !userPassword.getText().toString().equals("") &&
+                        FUtilsValidation.isLengthCorrect(userPassword.getText().toString(), 6, 16)) {
+                    User user = new User();
+                    user.setBase64(encImage);
+                    user.setName(userName.getText().toString());
+                    user.setPhone(userPhone.getText().toString());
+                    user.setEmail(userEmail.getText().toString());
+                    user.setAddress(userAddress.getText().toString());
+                    user.setPassword(userPassword.getText().toString());
+                    registerPresenter.getRegisterResult(user);
 
-            }else
-            {
-                Toast.makeText( this, "من فضلك ,املا البيانات الخاصه بك", Toast.LENGTH_SHORT ).show();
+                }
             }
+
         }else
         {
             Toast.makeText( this, "تأكد من اتصالك بالانترنت", Toast.LENGTH_SHORT ).show();

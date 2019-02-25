@@ -5,6 +5,7 @@ import android.util.JsonReader;
 import android.util.Log;
 
 
+import com.example.shosho.dietfood.SplashActivity;
 import com.example.shosho.dietfood.common.Constants;
 
 import org.json.JSONObject;
@@ -24,7 +25,7 @@ public class CheckoutIdRequestAsyncTask extends AsyncTask<String, Void, String> 
 
     private CheckoutIdRequestListener listener;
     StringBuilder result = new StringBuilder();
-
+   public static  String checkoutId;
     public CheckoutIdRequestAsyncTask(CheckoutIdRequestListener listener) {
         this.listener = listener;
     }
@@ -57,40 +58,23 @@ public class CheckoutIdRequestAsyncTask extends AsyncTask<String, Void, String> 
                 *//* store notificationUrl on your server to change it any time without updating the app *//*
                 "&notificationUrl=http://52.59.56.185:80/notification";*/
         String urlString = Constants.BASE_URL + "/checkout?" +
-                "amount=" +  "60"+
+                "amount=" +  amount +
                 "&userId=" + "8ac7a4c8686138d701686fad36ce11a4" +
                 "&password=" + "kejWhw4yhN" +
-                "&entityId=" +"8ac7a4c8686138d701686fad698011ae";
+                "&entityId=" +"8ac7a4c8686138d701686fad698011ae"
+              + "&user_token=" + SplashActivity.Login;
         URL url;
         HttpURLConnection connection = null;
-        String checkoutId = null;
+         checkoutId = null;
 
         try {
             url = new URL(urlString);
             connection = (HttpURLConnection) url.openConnection();
             connection.setConnectTimeout(Constants.CONNECTION_TIMEOUT);
             connection.setRequestMethod("POST");
-
-           /* JsonReader reader = new JsonReader(
-                    new InputStreamReader(connection.getInputStream(), "UTF-8"));
-
-            reader.beginObject();
-
-            while (reader.hasNext()) {
-                if (reader.nextName().equals("checkoutId")) {
-                    checkoutId = reader.nextString();
-
-                    break;
-                }
-            }
-
-            reader.endObject();
-            reader.close();*/
             if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 InputStream in = new BufferedInputStream(connection.getInputStream());
-
                 BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-
                 String line;
                 while ((line = reader.readLine()) != null) {
                     result.append(line);
@@ -100,7 +84,6 @@ public class CheckoutIdRequestAsyncTask extends AsyncTask<String, Void, String> 
                 checkoutId=jObj.getString("id");
                 reader.close();
             }
-
             Log.d(Constants.LOG_TAG, "Checkout ID: " + checkoutId);
         } catch (Exception e) {
             Log.e(Constants.LOG_TAG, "Error: ", e);

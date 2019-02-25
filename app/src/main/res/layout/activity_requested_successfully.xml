@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_60sdp"
+            android:textColor="#9b9b9b"
+            android:textSize="@dimen/_20sdp"
+            android:textStyle="bold"
+            android:text="تم طلب الاوردر بنجاح"
+            android:id="@+id/ord"
+            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:background="@drawable/backgroundprofile"
+            android:layout_below="@+id/ord"
+            android:id="@+id/rleaa"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_80sdp"
+            android:layout_height="@dimen/_150sdp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginRight="@dimen/_30sdp"
+                android:textColor="#9b9b9b"
+                android:textSize="@dimen/_17sdp"
+                android:textStyle="bold"
+                android:text="رقم الطلب"
+                android:id="@+id/orderid"
+                android:layout_alignParentRight="true"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginRight="@dimen/_50sdp"
+                android:layout_toLeftOf="@+id/orderid"
+                android:textColor="#9b9b9b"
+                android:textSize="@dimen/_17sdp"
+                android:textStyle="bold"
+                android:id="@+id/T_Orderss"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_marginRight="@dimen/_30sdp"
+                android:textColor="#9b9b9b"
+                android:textSize="@dimen/_17sdp"
+                android:textStyle="bold"
+                android:text="السعر"
+                android:id="@+id/price"
+                android:layout_below="@+id/orderid"
+                android:layout_alignParentRight="true"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_marginRight="@dimen/_50sdp"
+                android:layout_toLeftOf="@+id/orderid"
+                android:textColor="#9b9b9b"
+                android:textSize="@dimen/_17sdp"
+                android:textStyle="bold"
+                android:id="@+id/T_Price"
+                android:layout_below="@+id/orderid"
+                />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="@dimen/_130sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="تم"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:background="@drawable/backgroundaddcart"
+            android:layout_marginTop="@dimen/_50sdp"
+            android:layout_below="@+id/rleaa"
+            android:id="@+id/done"
+            android:textSize="@dimen/_18sdp"
+            android:textStyle="bold"
+            android:textColor="#fff"
+            />
+
+
+    </RelativeLayout>
+</ScrollView>

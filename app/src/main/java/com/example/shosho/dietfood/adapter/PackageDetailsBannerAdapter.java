@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.example.shosho.dietfood.R;
+import com.dietfoooood.R;
 import com.example.shosho.dietfood.model.PackageDetailsImageData;
 import com.example.shosho.dietfood.model.home.HomeBannerData;
 

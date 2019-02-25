@@ -17,8 +17,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dietfoooood.R;
 import com.example.shosho.dietfood.NetworkConnection;
-import com.example.shosho.dietfood.R;
 import com.example.shosho.dietfood.SplashActivity;
 import com.example.shosho.dietfood.fragment.HomeFragment;
 import com.example.shosho.dietfood.fragment.ProfileFragment;

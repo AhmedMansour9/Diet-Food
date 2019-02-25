@@ -7,8 +7,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.TextView;
 
-
-import com.example.shosho.dietfood.R;
+import com.dietfoooood.R;
 import com.example.shosho.dietfood.common.Constants;
 import com.example.shosho.dietfood.receiver.CheckoutBroadcastReceiver;
 import com.oppwa.mobile.connect.checkout.dialog.CheckoutActivity;
@@ -25,8 +24,8 @@ public class CheckoutUIActivity extends BasePaymentActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_checkout_ui);
-
-        String amount = Constants.Config.AMOUNT + " " + Constants.Config.CURRENCY;
+        String price=getIntent().getStringExtra("price");
+        String amount = price + " " + Constants.Config.CURRENCY;
 
         ((TextView) findViewById(R.id.amount_text_view)).setText(amount);
 
@@ -37,26 +36,23 @@ public class CheckoutUIActivity extends BasePaymentActivity {
             }
         });
     }
-
     @Override
     public void onCheckoutIdReceived(String checkoutId) {
         super.onCheckoutIdReceived(checkoutId);
-
         if (checkoutId != null) {
             openCheckoutUI(checkoutId);
         }
     }
-
     private void openCheckoutUI(String checkoutId) {
-        CheckoutSettings checkoutSettings = createCheckoutSettings(checkoutId, getString(R.string.checkout_ui_callback_scheme));
+        CheckoutSettings checkoutSettings = createCheckoutSettings
+                (checkoutId, getString(R.string.checkout_ui_callback_scheme));
 
         /* Set componentName if you want to receive callbacks from the checkout */
         ComponentName componentName = new ComponentName(
                 getPackageName(), CheckoutBroadcastReceiver.class.getName());
-
         /* Set up the Intent and start the checkout activity. */
         Intent intent = checkoutSettings.createCheckoutActivityIntent(this, componentName);
-
         startActivityForResult(intent, CheckoutActivity.REQUEST_CODE_CHECKOUT);
+
     }
 }

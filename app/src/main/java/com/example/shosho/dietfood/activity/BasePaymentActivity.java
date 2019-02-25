@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 
-import com.example.shosho.dietfood.R;
+import com.dietfoooood.R;
 import com.example.shosho.dietfood.common.Constants;
 import com.example.shosho.dietfood.task.CheckoutIdRequestAsyncTask;
 import com.example.shosho.dietfood.task.CheckoutIdRequestListener;
@@ -52,7 +52,6 @@ public class BasePaymentActivity extends BaseActivity
             requestPaymentStatus(resourcePath);
         }
     }
-
     /**
      * Returns <code>true</code> if the Intent contains one of the predefined schemes for the app.
      *
@@ -144,12 +143,50 @@ public class BasePaymentActivity extends BaseActivity
     public void onPaymentStatusReceived(String paymentStatus) {
         hideProgressDialog();
 
-        if ("OK".equals(paymentStatus)) {
+        if ("000.100.112".equals(paymentStatus)) {
             showAlertDialog(R.string.message_successful_payment);
             return;
         }
 
-        showAlertDialog(R.string.message_unsuccessful_payment);
+//        if ("Transaction succeeded".equals(paymentStatus)) {
+//            showAlertDialog(R.string.message_successful_payment);
+//            return;
+//        }
+//        if ("successful request".equals(paymentStatus)) {
+//            showAlertDialog(R.string.message_successful_payment);
+//            return;
+//        }
+//        if ("Request successfully processed in 'Merchant in Integrator Test Mode".equals(paymentStatus)) {
+//            showAlertDialog(R.string.message_successful_payment);
+//            return;
+//        }
+//        if ("Request successfully processed in 'Merchant in Validator Test Mode".equals(paymentStatus)) {
+//            showAlertDialog(R.string.message_successful_payment);
+//            return;
+//        }
+//        if ("Request successfully processed in 'Merchant in Connector Test Mode".equals(paymentStatus)) {
+//            showAlertDialog(R.string.message_successful_payment);
+//            return;
+//        }
+//        if ("Two-step transaction succeeded".equals(paymentStatus)) {
+//            showAlertDialog(R.string.message_successful_payment);
+//            return;
+//        }
+//        if ("Risk check successful".equals(paymentStatus)) {
+//            showAlertDialog(R.string.message_successful_payment);
+//            return;
+//        }
+//        if ("Risk report successful".equals(paymentStatus)) {
+//            showAlertDialog(R.string.message_successful_payment);
+//            return;
+//        }
+//        if ("transaction succeeded due to external update".equals(paymentStatus)) {
+//            showAlertDialog(R.string.message_successful_payment);
+//            return;
+//        }
+
+
+            showAlertDialog(R.string.message_unsuccessful_payment);
     }
 
     protected void requestPaymentStatus(String resourcePath) {

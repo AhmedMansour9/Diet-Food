@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.shosho.dietfood.R;
+import com.dietfoooood.R;
 import com.example.shosho.dietfood.model.CardData;
 import com.example.shosho.dietfood.view.DetailsCardView;
 import com.example.shosho.dietfood.view.OnClickMinCardView;
@@ -58,7 +58,8 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull final CardAdapter.ViewHolder holder, final int position) {
         holder.name.setText(cardDataList.get( position ).getMealFoodName());
-        Typeface customFontMedium = Typeface.createFromAsset( context.getAssets(), "Fonts/SST Arabic Medium.ttf" );
+        Typeface customFontMedium =
+                Typeface.createFromAsset( context.getAssets(), "Fonts/SST Arabic Medium.ttf" );
         Typeface customFontRegular = Typeface.createFromAsset( context.getAssets(), "Fonts/Cairo-Regular.ttf" );
         holder.name.setTypeface( customFontMedium );
 

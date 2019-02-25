@@ -19,7 +19,6 @@ public class Constants {
 
             PAYMENT_BRANDS.add("VISA");
             PAYMENT_BRANDS.add("MASTER");
-            PAYMENT_BRANDS.add("PAYPAL");
         }
 
         /* The default payment brand for payment button */
@@ -27,7 +26,7 @@ public class Constants {
 
         /* The default amount and currency */
         public static final String AMOUNT = PostOrderFragment.TotalPrice;
-        public static final String CURRENCY = "EUR";
+        public static final String CURRENCY = "SAR";
 
 //        /* The card info for SDK & Your Own UI*/
 //        public static final String CARD_BRAND = "VISA";

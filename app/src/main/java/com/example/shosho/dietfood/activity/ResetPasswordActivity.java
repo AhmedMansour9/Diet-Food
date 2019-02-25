@@ -9,8 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.dietfoooood.R;
 import com.example.shosho.dietfood.NetworkConnection;
-import com.example.shosho.dietfood.R;
 import com.example.shosho.dietfood.presenter.ResetPasswordPresenter;
 import com.example.shosho.dietfood.view.ResetPasswordView;
 import com.fourhcode.forhutils.FUtilsValidation;

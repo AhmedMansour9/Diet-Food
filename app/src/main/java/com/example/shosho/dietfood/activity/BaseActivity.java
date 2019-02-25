@@ -3,9 +3,10 @@ package com.example.shosho.dietfood.activity;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 
-import com.example.shosho.dietfood.R;
+import com.dietfoooood.R;
 
 
 @SuppressLint("Registered")
@@ -35,11 +36,17 @@ public class BaseActivity extends AppCompatActivity {
         progressDialog.dismiss();
     }
 
-    protected void showAlertDialog(String message) {
+    protected void showAlertDialog(final String message) {
         new AlertDialog.Builder(this)
                 .setMessage(message)
-                .setPositiveButton(R.string.button_ok, null)
+                .setPositiveButton(R.string.button_ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+//                        if(message.equals(The payment was successful))
+                    }
+                })
                 .setCancelable(false)
+
                 .show();
     }
 

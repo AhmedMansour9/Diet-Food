@@ -2,6 +2,7 @@ package com.example.shosho.dietfood.fragment;
 
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -17,8 +18,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.dietfoooood.R;
 import com.example.shosho.dietfood.NetworkConnection;
-import com.example.shosho.dietfood.R;
 import com.example.shosho.dietfood.SplashActivity;
 import com.example.shosho.dietfood.activity.LoginActivity;
 import com.example.shosho.dietfood.adapter.CardAdapter;
@@ -53,6 +54,7 @@ TextView cancelSubscribtion;
 
 NetworkConnection networkConnection;
 SwipeRefreshLayout swipeRefreshLayout;
+Context context;
     public MySubscribtionFragment() {
         // Required empty public constructor
     }
@@ -62,8 +64,8 @@ View view;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view= inflater.inflate( R.layout.fragment_my_subscribtion, container, false );
-
+        view= inflater.inflate(  R.layout.fragment_my_subscribtion, container, false );
+        context=this.getActivity();
         init();
         networkConnection=new NetworkConnection(getContext());
         mySubscribtionPresenter=new MySubscribtionPresenter( getContext(),this );
@@ -155,7 +157,9 @@ View view;
 
     @Override
     public void showCancelSubscribtionResult(String Message) {
-        Toast.makeText(getContext(), Message, Toast.LENGTH_SHORT).show();
+        if(context!=null) {
+            Toast.makeText(getActivity(), Message, Toast.LENGTH_SHORT).show();
+        }
         swipeRefreshLayout.setRefreshing( false );
     }
 
@@ -174,7 +178,7 @@ View view;
 
         }else
         {
-            Toast.makeText(getContext(), "لا يتوفر انترنت", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getContext(), "لا يتوفر انترنت", Toast.LENGTH_SHORT).show();
         }
     }
 }

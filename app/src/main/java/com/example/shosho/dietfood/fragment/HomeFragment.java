@@ -16,8 +16,9 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+
+import com.dietfoooood.R;
 import com.example.shosho.dietfood.NetworkConnection;
-import com.example.shosho.dietfood.R;
 import com.example.shosho.dietfood.SplashActivity;
 import com.example.shosho.dietfood.adapter.HomeBannerAdapter;
 import com.example.shosho.dietfood.adapter.HomeProductAdapter;

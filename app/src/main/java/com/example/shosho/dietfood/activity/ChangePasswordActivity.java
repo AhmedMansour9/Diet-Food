@@ -11,8 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.dietfoooood.R;
 import com.example.shosho.dietfood.NetworkConnection;
-import com.example.shosho.dietfood.R;
 import com.example.shosho.dietfood.model.User;
 import com.example.shosho.dietfood.presenter.ChangePasswordPresenter;
 import com.example.shosho.dietfood.view.ChangePasswordView;

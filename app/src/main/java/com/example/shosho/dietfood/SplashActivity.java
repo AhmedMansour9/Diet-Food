@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 
+
+import com.dietfoooood.R;
 import com.example.shosho.dietfood.activity.HomeActivity;
 import com.example.shosho.dietfood.activity.LoginActivity;
 
@@ -47,7 +49,7 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 super.run();
                 try {
-                    sleep( 4000 );
+                    sleep( 3000 );
 
                 }catch (InterruptedException e)
                 {
