@@ -14,9 +14,9 @@
     <application
         android:allowBackup="false"
         tools:replace="allowBackup,supportsRtl"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/kh"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/kh"
         android:supportsRtl="false"
         android:theme="@style/AppTheme.NoActionBar">
         <receiver

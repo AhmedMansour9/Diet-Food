@@ -104,8 +104,6 @@ public class CardFragment extends Fragment implements CardView ,AddToCardView
                goToPostOrderPage();
            }
        });
-
-
         swipRefresh();
         return view;
     }

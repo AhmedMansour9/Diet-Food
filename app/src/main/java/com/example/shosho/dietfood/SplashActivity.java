@@ -41,8 +41,6 @@ public class SplashActivity extends AppCompatActivity {
         sharedPref=getSharedPreferences( "default",Context.MODE_PRIVATE );
         Login=sharedPref.getString( "login_to_home",null );
 
-
-
         Thread timer=new Thread(  )
         {
             @Override
@@ -50,7 +48,6 @@ public class SplashActivity extends AppCompatActivity {
                 super.run();
                 try {
                     sleep( 3000 );
-
                 }catch (InterruptedException e)
                 {
                     e.printStackTrace();
@@ -69,9 +66,7 @@ public class SplashActivity extends AppCompatActivity {
                 }
             }
         };
-
         timer.start();
-
     }
 
 }
