@@ -24,8 +24,8 @@
         android:layout_alignParentLeft="true"
         android:alpha=".7"
         android:background="#FF4B5157"
+        android:id="@+id/relatii">
 
-        >
 
         <TextView
             android:id="@+id/row_home_product_title"

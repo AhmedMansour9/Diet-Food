@@ -7,58 +7,32 @@ import android.os.Parcelable.Creator;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class PostOrderData implements  Parcelable
+public class PostOrderData
 {
 
     @SerializedName("orderId")
     @Expose
-    private int orderId;
+    private Integer orderId;
     @SerializedName("total")
     @Expose
-    private int total;
+    private Integer total;
     @SerializedName("message")
     @Expose
     private String message;
-    public final static Parcelable.Creator<PostOrderData> CREATOR = new Creator<PostOrderData>() {
 
-
-        @SuppressWarnings({
-                "unchecked"
-        })
-        public PostOrderData createFromParcel(Parcel in) {
-            return new PostOrderData(in);
-        }
-
-        public PostOrderData[] newArray(int size) {
-            return (new PostOrderData[size]);
-        }
-
-    }
-            ;
-    private final static long serialVersionUID = -1015642447541852261L;
-
-    protected PostOrderData(Parcel in) {
-        this.orderId = ((int) in.readValue((int.class.getClassLoader())));
-        this.total = ((int) in.readValue((int.class.getClassLoader())));
-        this.message = ((String) in.readValue((String.class.getClassLoader())));
-    }
-
-    public PostOrderData() {
-    }
-
-    public int getOrderId() {
+    public Integer getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(int orderId) {
+    public void setOrderId(Integer orderId) {
         this.orderId = orderId;
     }
 
-    public int getTotal() {
+    public Integer getTotal() {
         return total;
     }
 
-    public void setTotal(int total) {
+    public void setTotal(Integer total) {
         this.total = total;
     }
 
@@ -68,16 +42,6 @@ public class PostOrderData implements  Parcelable
 
     public void setMessage(String message) {
         this.message = message;
-    }
-
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(orderId);
-        dest.writeValue(total);
-        dest.writeValue(message);
-    }
-
-    public int describeContents() {
-        return 0;
     }
 
 }

@@ -5,8 +5,7 @@
     android:layout_height="match_parent"
     android:background="#fff"
     android:clickable="true"
-    android:id="@+id/profile_frame_container"
-    tools:context=".fragment.ProfileFragment">
+    android:id="@+id/profile_frame_container">
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
@@ -14,10 +13,14 @@
         android:id="@+id/profile_swip_refresh">
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
+
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
+
+
         <android.support.v7.widget.Toolbar
             android:id="@+id/profile_tool_bar"
             android:layout_width="match_parent"
@@ -33,14 +36,15 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/_10sdp"
                     android:background="@drawable/notifications_button"
-                    android:layout_alignParentRight="true"/>
+                    />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
                     android:text="تسجيل خروج"
                     android:textColor="#fff"
                     android:id="@+id/log_out"
+                    android:layout_marginRight="@dimen/_20sdp"
+                    android:layout_alignParentRight="true"
                     />
                 <TextView
                     android:layout_width="wrap_content"
@@ -64,13 +68,13 @@
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile_image"
        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="@dimen/_104sdp"
-        android:layout_height="@dimen/_104sdp"
+        android:layout_width="@dimen/_70sdp"
+        android:layout_height="@dimen/_100sdp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/_4sdp"
         app:civ_border_width="@dimen/_2sdp"
         app:civ_border_color="#cdcdcd"
-        android:background="@drawable/profile_img"
+        android:src="@drawable/profile"
 
         />
         <TextView
@@ -202,6 +206,8 @@
 
 
     </RelativeLayout>
+
+
     </RelativeLayout>
 
     </ScrollView>

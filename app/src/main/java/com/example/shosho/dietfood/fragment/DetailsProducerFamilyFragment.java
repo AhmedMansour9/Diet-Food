@@ -97,8 +97,14 @@ public class DetailsProducerFamilyFragment extends Fragment implements MealCompo
             mealName.setText(producerFamilyData.getName());
             mealName.setTypeface( customFontMedium );
 
-            mealPrice.setText(producerFamilyData.getPrice()+" SR");
-            mealPrice.setTypeface( customFontMedium );
+            if(Integer.parseInt(producerFamilyData.getPrice())==0){
+
+                mealPrice.setVisibility(View.GONE);
+            }else {
+                mealPrice.setText(producerFamilyData.getPrice() + " SR");
+                mealPrice.setTypeface( customFontMedium );
+
+            }
             mealComponentPresenter=new MealComponentPresenter(getContext(),this);
             mealComponentPresenter.getMealComponenttList(producerFamilyData.getId());
         }

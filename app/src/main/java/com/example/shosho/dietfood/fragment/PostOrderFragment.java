@@ -3,6 +3,7 @@ package com.example.shosho.dietfood.fragment;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
@@ -38,6 +39,7 @@ import com.example.shosho.dietfood.activity.ChangePasswordActivity;
 import com.example.shosho.dietfood.activity.CheckoutUIActivity;
 import com.example.shosho.dietfood.activity.LoginActivity;
 import com.example.shosho.dietfood.model.CardData;
+import com.example.shosho.dietfood.model.PostOrderData;
 import com.example.shosho.dietfood.model.PostOrderResponse;
 import com.example.shosho.dietfood.model.User;
 import com.example.shosho.dietfood.presenter.MealComponentPresenter;
@@ -90,10 +92,9 @@ public class PostOrderFragment extends Fragment implements PostOrderView
     EditText ET_address,E_City,E_State;
     Gbs e;
     GPSTracker gbs;
-
     Bundle bundle;
-   public static String TotalPrice;
-
+   public static String TotalPrice,Tybe,Phone,Email,Msg,Name;
+   Context context;
     public PostOrderFragment() {
         // Required empty public constructor
     }
@@ -105,20 +106,18 @@ View view;
         // Inflate the layout for this fragment
         view= inflater.inflate(R.layout.fragment_post_order, container, false);
         init();
-
+        context=this.getActivity();
         bundle=this.getArguments();
-
         if (bundle!=null)
         {
             TotalPrice =bundle.getString( "totalPrice" );
-
-
+            Tybe=bundle.getString( "check");
+//            Phone=bundle.getString( "phone");
+            Email=bundle.getString( "email");
+            Msg=bundle.getString( "msg");
+            Name=bundle.getString("name");
           //  Toast.makeText(getContext(), TotalPrice, Toast.LENGTH_SHORT).show();
-
-
         }
-
-
         postOrderPresenter=new PostOrderPresenter(getContext(),this);
         networkConnection=new NetworkConnection(getContext());
         gbs=new GPSTracker(getContext());
@@ -126,8 +125,6 @@ View view;
             @Override
             public void onClick(View view) {
                 performOrder();
-
-
             }
         });
         e=new Gbs();
@@ -205,7 +202,7 @@ View view;
                     &&
                     !E_State.getText().toString().equals("")) {
 
-
+              Phone=userPhone.getText().toString();
                 User user=new User();
                 user.setUserToken(SplashActivity.Login);
                 user.setPhone(userPhone.getText().toString());
@@ -228,8 +225,13 @@ View view;
         E_State=view.findViewById(R.id.state);
     }
 
+
     @Override
-    public void showPostOrderResult(String Message) {
+    public void showPostOrderResult(PostOrderData postOrderData) {
+    }
+
+    @Override
+    public void showPostOrderRe(String message) {
         Intent inty=new Intent(getActivity(),CheckoutUIActivity.class);
         inty.putExtra("price",TotalPrice);
         startActivity(inty);
@@ -295,14 +297,15 @@ View view;
 
         try {
 
+       if(context!=null) {
+           Geocoder geocoder = new Geocoder(context);
+           addresses = geocoder.getFromLocation(latitude, longitude, 1);
+           addres = addresses.get(0).getAddressLine(0);
+           Cities = addresses.get(0).getAdminArea();
+           ET_address.setText(addres + "");
+           E_City.setText(Cities);
 
-            Geocoder geocoder = new Geocoder(getContext());
-            addresses = geocoder.getFromLocation(latitude, longitude, 1);
-            addres = addresses.get(0).getAddressLine(0);
-            Cities = addresses.get(0).getAdminArea();
-            ET_address.setText(addres + "");
-            E_City.setText(Cities);
-
+       }
         } catch (IOException d) {
             d.printStackTrace();
         }

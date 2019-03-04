@@ -18,6 +18,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.dietfoooood.R;
@@ -36,7 +37,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
     ImageView userImage;
     EditText userName,userEmail,userPhone,userAddress,userPassword;
 
-
+    ProgressBar progross;
     RegisterPresenter registerPresenter;
 
     public static int ACTION_MANAGE_OVERLAY_PERMISSION_REQUEST_CODE=5469;
@@ -48,12 +49,12 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//        getWindow().setSoftInputMode(
+//                WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         setContentView( R.layout.activity_register );
         init();
-
-
 //        checkPermission();
-
         userImage.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,22 +73,9 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
         registerPresenter=new RegisterPresenter( this,(RegisterView) this );
     }
 
-
     private void selectUserImageFromGallery() {
         Intent galleryIntent=new Intent( Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI );
         startActivityForResult(galleryIntent,PICK_IMAGE_REQUEST  );
-    }
-
-    private void checkPermission() {
-        if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.M)
-        {
-            if (!Settings.canDrawOverlays(this))
-            {
-                Intent intent=new Intent( Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                        Uri.parse("package"+"com.example.shosho.dietfood") );
-                startActivityForResult(intent, ACTION_MANAGE_OVERLAY_PERMISSION_REQUEST_CODE);
-            }
-        }
     }
 
     @Override
@@ -126,8 +114,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
             if(userPassword.getText().toString().length()<6)
             {
                 Toast.makeText(this, "من فضلك ادخل كلمه المرور فيما لا يقل عن سته ارقام !", Toast.LENGTH_SHORT).show();
-            }
-          else if ( validateEmail()) {
+            } else if ( validateEmail()) {
                 if (!userName.getText().toString().equals("") &&
                         !userPhone.getText().toString().equals("") &&
                         !userEmail.getText().toString().equals("") &&
@@ -141,8 +128,9 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
                     user.setEmail(userEmail.getText().toString());
                     user.setAddress(userAddress.getText().toString());
                     user.setPassword(userPassword.getText().toString());
+                    progross.setVisibility(View.VISIBLE);
+                    registerButton.setEnabled(false);
                     registerPresenter.getRegisterResult(user);
-
                 }
             }
 
@@ -178,12 +166,14 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
         userEmail=findViewById( R.id.register_edit_text_email );
         userAddress=findViewById( R.id.register_edit_text_address);
         userPassword=findViewById( R.id.register_edit_text_password);
-
+        progross=findViewById(R.id.Progross);
 
     }
 
     @Override
     public void showRegisterResult() {
+        registerButton.setEnabled(true);
+        progross.setVisibility(View.GONE);
         Toast.makeText( this, "تم التسجيل", Toast.LENGTH_SHORT ).show();
         Intent intent=new Intent( RegisterActivity.this,LoginActivity.class );
         startActivity( intent );
@@ -191,11 +181,15 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
 
     @Override
     public void showEmailAlreadyToken(String Message) {
+        registerButton.setEnabled(true);
+        progross.setVisibility(View.GONE);
         Toast.makeText(this, "The Email has already been token!", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void showError() {
+        registerButton.setEnabled(true);
+        progross.setVisibility(View.GONE);
         Toast.makeText( this, "فشل التسجيل", Toast.LENGTH_SHORT ).show();
     }
 }

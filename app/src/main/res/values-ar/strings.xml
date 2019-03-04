@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">كاربش</string>
     <string name="ForgotPassword">هل نسيت الرقم السري؟</string>
     <string name="Do_not_have_an_account">لا تملك حساب الكترونى؟</string>
     <string name="Register">خروج</string>

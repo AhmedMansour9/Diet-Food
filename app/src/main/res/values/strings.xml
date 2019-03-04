@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DietFood</string>
+    <string name="app_name">Karabish</string>
 
     <!-- we use different callback schemes here to avoid 'Open with' dialog,
          the intent-filter for callback must be defined in the same activity which initiates the checkout

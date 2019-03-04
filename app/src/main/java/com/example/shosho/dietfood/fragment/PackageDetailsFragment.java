@@ -2,6 +2,7 @@ package com.example.shosho.dietfood.fragment;
 
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -55,7 +56,9 @@ public class PackageDetailsFragment extends Fragment implements PackageDetailsVi
     Button subscribeBtn;
     String UserToken;
     PackageDetailsData packageDetailsData;
-
+    public static String Id;
+    String PRICE;
+    Context context;
     public PackageDetailsFragment() {
         // Required empty public constructor
     }
@@ -70,6 +73,7 @@ public class PackageDetailsFragment extends Fragment implements PackageDetailsVi
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_package_details, container, false);
+        context=this.getActivity();
         init();
 
         UserToken=SplashActivity.Login;
@@ -111,7 +115,24 @@ subscribeBtn.setOnClickListener( new View.OnClickListener() {
                 ((Activity) getActivity()).overridePendingTransition(0,0);
             }else {
                 //Toast.makeText( getContext(), UserToken+"id  "+packageDetailsData.getId(), Toast.LENGTH_SHORT ).show();
-                subscribtionPresenter.getSubscribtionResult( UserToken,packageDetailsData.getId() );
+
+                if (PRICE != null) {
+                PostOrderFragment postOrderFragment = new PostOrderFragment();
+                Bundle bundle = new Bundle();
+
+                    double price = Double.parseDouble(PRICE);
+                    int Price = (int) price;
+                    bundle.putString("totalPrice", String.valueOf(Price));
+                    bundle.putString("check", "eshtrak");
+                    bundle.putString("name", null);
+                    bundle.putString("email", null);
+                    bundle.putString("phone", null);
+                    bundle.putString("msg", null);
+                    postOrderFragment.setArguments(bundle);
+                    getFragmentManager().beginTransaction().replace(R.id.home_frame_container
+                            , postOrderFragment).addToBackStack(null).commit();
+
+                }
             }
 
         }else
@@ -133,11 +154,19 @@ subscribeBtn.setOnClickListener( new View.OnClickListener() {
     @Override
     public void showPackageDetails(PackageDetailsData packageDetailsData) {
         this.packageDetailsData=packageDetailsData;
-        Typeface customFontMedium = Typeface.createFromAsset(getContext().getAssets(), "Fonts/SST Arabic Medium.ttf");
+        Id=packageDetailsData.getId();
+        if(context!=null) {
+            Typeface customFontMedium = Typeface.createFromAsset(context.getAssets(), "Fonts/SST Arabic Medium.ttf");
+
         name.setText(packageDetailsData.getName());
+        PRICE=packageDetailsData.getPrice();
+        if(Integer.parseInt(packageDetailsData.getPrice())==0){
 
+            price.setVisibility(View.GONE);
+        }else {
+            price.setText(packageDetailsData.getPrice() + " SR");
+        }
 
-        price.setText(packageDetailsData.getPrice() + " ريال");
         price.setTypeface(customFontMedium);
 
         type.setText(packageDetailsData.getType());
@@ -145,7 +174,7 @@ subscribeBtn.setOnClickListener( new View.OnClickListener() {
 
        details.setText( packageDetailsData.getDescription());
         details.setTypeface(customFontMedium);
-
+        }
 
     }
 
@@ -160,7 +189,7 @@ subscribeBtn.setOnClickListener( new View.OnClickListener() {
 
         if (banners.size() > 1) {
             Timer timer = new Timer();
-            timer.scheduleAtFixedRate(new AutoScrollTask(), 4000, 4000);
+            timer.scheduleAtFixedRate(new AutoScrollTask(), 1000, 2000);
         }
     }
 
@@ -189,7 +218,6 @@ subscribeBtn.setOnClickListener( new View.OnClickListener() {
 
     @Override
     public void showSubscribtionResult(String Message) {
-        Toast.makeText( getContext(), Message, Toast.LENGTH_SHORT ).show();
     }
 
     @Override

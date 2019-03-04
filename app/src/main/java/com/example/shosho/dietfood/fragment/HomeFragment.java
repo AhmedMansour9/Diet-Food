@@ -2,6 +2,7 @@ package com.example.shosho.dietfood.fragment;
 
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -63,6 +65,8 @@ ImageView producerFamilies,subscribtions,consultation;
 
     private SwipeRefreshLayout swipeRefreshLayout;
 
+    RelativeLayout strength,diet,healthy;
+    TextView strengthText,dietText,healthyText;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -77,18 +81,12 @@ View view;
         getActivity().getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE |
                         View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-
         init();
-
-
         homeBannerPresenter=new HomeBannerPresenter(getContext(),this);
         Banner();
         networkConnection=new NetworkConnection( getContext() );
         homeProductPresenter=new HomeProductPresenter( getContext(),this );
-        homeProductPresenter.getHomeProductList();
-
-
-
+//        homeProductPresenter.getHomeProductList();
         swipRefresh();
         int currentApiVersion = Build.VERSION.SDK_INT;
         final int flags = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
@@ -135,32 +133,81 @@ View view;
     }
 
     private void Banner() {
-
         homeBannerPresenter.getHomeBannerResult();
     }
-
     private void init() {
         /*producerFamilies=view.findViewById( R.id.home_nav_producer_fam );*/
       /*  subscribtions=view.findViewById( R.id.home_nav_subscribtions );
         consultation=view.findViewById( R.id.home_nav_consultation );*/
-        recyclerViewHomeProduct=view.findViewById(R.id.home_recycler_product);
+//        recyclerViewHomeProduct=view.findViewById(R.id.home_recycler_product);
         recyclerViewHomeBanner=view.findViewById(R.id.home_recycler_banner);
         relativeLayoutFamily=view.findViewById(R.id.relative_fam);
         relativeLayoutSubscribtion=view.findViewById(R.id.relative_subscribe);
         relativeLayoutConsultation=view.findViewById(R.id.relative_consult);
         swipeRefreshLayout=view.findViewById( R.id.home_swip_refresh );
+        strength=view.findViewById(R.id.monthly_subscribe_relative1);
+        diet=view.findViewById(R.id.monthly_subscribe_relative2);
+        healthy=view.findViewById(R.id.monthly_subscribe_relative3);
+
+        strengthText=view.findViewById(R.id.monthly_subscribe_title1);
+        dietText=view.findViewById(R.id.monthly_subscribe_title2);
+        healthyText=view.findViewById(R.id.monthly_subscribe_title3);
+
+        strength.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PackageDetailsFragment packageDetailsFragment=new PackageDetailsFragment();
+
+                Bundle bundle=new Bundle();
+                bundle.putString("type","a1");
+                packageDetailsFragment.setArguments(bundle);
+                getFragmentManager().beginTransaction().add(R.id.home_frame_container,packageDetailsFragment)
+                        .addToBackStack(null).commit();
+
+
+            }
+        });
+        diet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PackageDetailsFragment packageDetailsFragment=new PackageDetailsFragment();
+                Bundle bundle=new Bundle();
+                bundle.putString("type","a2");
+                packageDetailsFragment.setArguments(bundle);
+                getFragmentManager().beginTransaction().add(R.id.home_frame_container,packageDetailsFragment)
+                        .addToBackStack(null).commit();
+
+            }
+        });
+        healthy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PackageDetailsFragment packageDetailsFragment=new PackageDetailsFragment();
+                Bundle bundle=new Bundle();
+                bundle.putString("type","a3");
+                packageDetailsFragment.setArguments(bundle);
+                getFragmentManager().beginTransaction().add(R.id.home_frame_container,packageDetailsFragment)
+                        .addToBackStack(null).commit();
+
+            }
+        });
+        Typeface customFontMedium = Typeface.createFromAsset(getContext().getAssets(), "Fonts/SST Arabic Medium.ttf");
+        strengthText.setTypeface(customFontMedium);
+
+        dietText.setTypeface(customFontMedium);
+        healthyText.setTypeface(customFontMedium);
     }
 
 
     @Override
     public void showHomeProductResult(List<HomeProductData> homeProductDataList) {
 
-        homeProductAdapter=new HomeProductAdapter( getContext(),homeProductDataList );
-        homeProductAdapter.onClick(this);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
-        recyclerViewHomeProduct.setLayoutManager(gridLayoutManager);
-        recyclerViewHomeProduct.setAdapter( homeProductAdapter );
-        swipeRefreshLayout.setRefreshing( false );
+//        homeProductAdapter=new HomeProductAdapter( getContext(),homeProductDataList );
+//        homeProductAdapter.onClick(this);
+//        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
+//        recyclerViewHomeProduct.setLayoutManager(gridLayoutManager);
+//        recyclerViewHomeProduct.setAdapter( homeProductAdapter );
+//        swipeRefreshLayout.setRefreshing( false );
     }
 
     @Override

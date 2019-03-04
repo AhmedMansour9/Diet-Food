@@ -69,12 +69,28 @@ View view;
                     !userMsg.getText().toString().equals("")&&
                     validateEmail())
             {
-                User user=new User();
-                user.setName(userName.getText().toString());
-                user.setPhone(userPhone.getText().toString());
-                user.setEmail(userEmail.getText().toString());
-                user.setMsg(userMsg.getText().toString());
-                paidConsultationPresenter.getPaidConsultationResult(user);
+
+                PostOrderFragment postOrderFragment=new PostOrderFragment();
+                Bundle bundle=new Bundle();
+//                double price=Double.parseDouble(PRICE);
+//                int Price=(int)price;
+                bundle.putString( "totalPrice","120");
+                bundle.putString( "check","esteshara");
+                bundle.putString( "name",userName.getText().toString());
+                bundle.putString( "email",userEmail.getText().toString());
+                bundle.putString( "phone",userPhone.getText().toString());
+                bundle.putString( "msg",userMsg.getText().toString());
+
+                postOrderFragment.setArguments(bundle);
+                getFragmentManager().beginTransaction().replace(R.id.home_frame_container
+                        ,postOrderFragment).addToBackStack(null).commit();
+
+//                User user=new User();
+//                user.setName(userName.getText().toString());
+//                user.setPhone(userName.getText().toString());
+//                user.setEmail(userEmail.getText().toString());
+//                user.setMsg(userMsg.getText().toString());
+//                paidConsultationPresenter.getPaidConsultationResult(user);
             }
 
             else

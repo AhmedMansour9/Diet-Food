@@ -58,7 +58,7 @@ public class CheckoutIdRequestAsyncTask extends AsyncTask<String, Void, String> 
                 *//* store notificationUrl on your server to change it any time without updating the app *//*
                 "&notificationUrl=http://52.59.56.185:80/notification";*/
         String urlString = Constants.BASE_URL + "/checkout?" +
-                "amount=" +  amount +
+                "amount=" + amount +
                 "&userId=" + "8ac7a4c8686138d701686fad36ce11a4" +
                 "&password=" + "kejWhw4yhN" +
                 "&entityId=" +"8ac7a4c8686138d701686fad698011ae"

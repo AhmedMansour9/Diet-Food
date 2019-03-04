@@ -4,9 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
-    android:clickable="true"
-
-    tools:context=".fragment.PaidConsultationFragment">
+    android:clickable="true">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/paid_consult_tool_bar"
@@ -46,6 +44,8 @@
 
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
+
+
 
     <RelativeLayout
         android:id="@+id/relative_name"

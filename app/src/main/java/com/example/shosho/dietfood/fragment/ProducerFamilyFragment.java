@@ -35,7 +35,6 @@ public class ProducerFamilyFragment extends Fragment implements ProducerFamilyVi
     public static String Id;
 
     public ProducerFamilyFragment() {
-        // Required empty public constructor
     }
 
     View view;
@@ -53,7 +52,6 @@ public class ProducerFamilyFragment extends Fragment implements ProducerFamilyVi
     private void init() {
         recyclerViewProducerFamily=view.findViewById(R.id.prod_family_recycler);
         mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
-
     }
 
     @Override

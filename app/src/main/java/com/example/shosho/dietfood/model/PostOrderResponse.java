@@ -7,7 +7,7 @@ import android.os.Parcelable.Creator;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class PostOrderResponse implements  Parcelable
+public class PostOrderResponse
 {
 
     @SerializedName("message")
@@ -15,36 +15,10 @@ public class PostOrderResponse implements  Parcelable
     private PostOrderData message;
     @SerializedName("status")
     @Expose
-    private boolean status;
+    private Boolean status;
     @SerializedName("error")
     @Expose
     private String error;
-    public final static Parcelable.Creator<PostOrderResponse> CREATOR = new Creator<PostOrderResponse>() {
-
-
-        @SuppressWarnings({
-                "unchecked"
-        })
-        public PostOrderResponse createFromParcel(Parcel in) {
-            return new PostOrderResponse(in);
-        }
-
-        public PostOrderResponse[] newArray(int size) {
-            return (new PostOrderResponse[size]);
-        }
-
-    }
-            ;
-    private final static long serialVersionUID = -4951453438861501956L;
-
-    protected PostOrderResponse(Parcel in) {
-        this.message = ((PostOrderData) in.readValue((PostOrderData.class.getClassLoader())));
-        this.status = ((boolean) in.readValue((boolean.class.getClassLoader())));
-        this.error = ((String) in.readValue((String.class.getClassLoader())));
-    }
-
-    public PostOrderResponse() {
-    }
 
     public PostOrderData getMessage() {
         return message;
@@ -54,11 +28,11 @@ public class PostOrderResponse implements  Parcelable
         this.message = message;
     }
 
-    public boolean isStatus() {
+    public Boolean getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(Boolean status) {
         this.status = status;
     }
 
@@ -68,16 +42,4 @@ public class PostOrderResponse implements  Parcelable
 
     public void setError(String error) {
         this.error = error;
-    }
-
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(message);
-        dest.writeValue(status);
-        dest.writeValue(error);
-    }
-
-    public int describeContents() {
-        return 0;
-    }
-
-}
+    }}

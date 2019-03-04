@@ -27,37 +27,30 @@ public class PostOrderPresenter {
         this.postOrderView = postOrderView;
     }
 
-//    public void getPostOrderResult(User user)
-//    {
-//        HashMap<String,String> hashMap=new HashMap<>(  );
-//        hashMap.put( "user_token",user.getUserToken());
-//        hashMap.put( "phone",user.getPhone() );
-//        hashMap.put( "street1",user.getAddress() );
-//        hashMap.put( "city",user.getCity() );
-//        hashMap.put( "state",user.getState() );
-//        hashMap.put( "lat",user.getLat() );
-//        hashMap.put( "lng",user.getLng() );
-//
-//        Service service= Client.getClient().create( Service.class );
-//        Call<PostOrderResponse> call=service.getPostOrder( hashMap );
-//
-//        call.enqueue( new Callback<PostOrderResponse>() {
-//            @Override
-//            public void onResponse(Call<PostOrderResponse> call, Response<PostOrderResponse> response) {
-//                if(response.isSuccessful())
-//                {
-//                       postOrderView.showPostOrderResult(response.body().getMessage().getMessage());
-//
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<PostOrderResponse> call, Throwable t) {
-//                postOrderView.showError(  );
-//            }
-//        } );
-//    }
-//}
+    public void getPostOrder(User user)
+    {
+        HashMap<String,String> hashMap=new HashMap<>(  );
+        hashMap.put( "user_token",user.getUserToken());
+        hashMap.put( "phone",user.getPhone() );
+
+        Service service= Client.getClient().create( Service.class );
+        Call<PostOrderResponse> call=service.getPostOrderData( hashMap );
+        call.enqueue( new Callback<PostOrderResponse>() {
+            @Override
+            public void onResponse(Call<PostOrderResponse> call, Response<PostOrderResponse> response) {
+                if(response.isSuccessful())
+                {
+                       postOrderView.showPostOrderResult(response.body().getMessage());
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PostOrderResponse> call, Throwable t) {
+                postOrderView.showError(  );
+            }
+        } );
+}
 
     public void getPostOrderResult(User user)
     {
@@ -78,7 +71,7 @@ public class PostOrderPresenter {
             public void onResponse(Call<StoreDataResponse> call, Response<StoreDataResponse> response) {
                 if(response.isSuccessful()) {
                     if (response.body().getMessage().equals("success")) {
-                        postOrderView.showPostOrderResult(response.body().getMessage());
+                        postOrderView.showPostOrderRe(response.body().getMessage());
                     }
                 }
             }

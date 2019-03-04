@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -45,7 +46,12 @@ public void onBindViewHolder(@NonNull final ViewHolder holder, final int positio
 
         holder.name.setTypeface( customFontMedium );
 
-        holder.price.setText(homeProductDataList.get( position ).getPrice()+" SR");
+       if(Integer.parseInt(homeProductDataList.get( position ).getPrice())==0){
+
+           holder.relatii.setVisibility(View.GONE);
+       }else {
+           holder.price.setText(homeProductDataList.get(position).getPrice() + " SR");
+       }
 
         holder.price.setTypeface( customFontMedium );
 
@@ -69,12 +75,14 @@ public class ViewHolder extends RecyclerView.ViewHolder{
     private ImageView imageView;
     private TextView name;
     private TextView price;
+    private RelativeLayout relatii;
 
     public ViewHolder(View itemView) {
         super( itemView );
         imageView=itemView.findViewById( R.id.row_home_product_image );
         name=itemView.findViewById( R.id.row_home_product_title );
         price=itemView.findViewById( R.id.row_home_product_price );
+        relatii=itemView.findViewById(R.id.relatii);
 
 
     }

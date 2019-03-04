@@ -14,6 +14,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,7 +41,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView{
     SharedPreferences.Editor sharedPref;
 
     TextView forgetPassword;
-
+    ProgressBar progroslogin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
@@ -110,8 +111,11 @@ public class LoginActivity extends AppCompatActivity implements LoginView{
                     !userPassword.getText().toString().equals("")&&
                     validateEmail())
             {
+                progroslogin.setVisibility(View.VISIBLE);
+                loginBtn.setEnabled(false);
                 loginPresenter.getLoginResult( userEmail.getText().toString(),
                         userPassword.getText().toString() );
+
             }
 
             else
@@ -140,7 +144,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView{
       completeAsVisitor=findViewById( R.id.login_text_complete_as_visitor );
        userEmail=findViewById( R.id.login_edit_text_email );
         userPassword=findViewById( R.id.login_edit_text_password );
-
+        progroslogin=findViewById(R.id.progroslogin);
         loginBtn=findViewById( R.id.login_btn_login );
         forgetPassword=findViewById( R.id.login_text_forgot_password );
 
@@ -150,6 +154,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView{
 
     @Override
     public void showLoginResult(String UserToken) {
+        loginBtn.setEnabled(true);
         sharedPref.putString( "login_to_home",UserToken );
         sharedPref.apply();
         SplashActivity.Login=UserToken;
@@ -163,6 +168,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView{
     @Override
     public void showError() {
         Toast.makeText( this, "فشل الدخول", Toast.LENGTH_SHORT ).show();
+        loginBtn.setEnabled(true);
     }
 
 }

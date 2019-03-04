@@ -125,7 +125,7 @@ View view;
 
     @Override
     public void showMySubscribtionsResult(MySubscribtionSpecialData mySubscribtionSpecialData) {
-        Glide.with( getContext() ).load( "http://dietfoodksa.com/site/"
+        Glide.with( context).load( "http://dietfoodksa.com/site/"
                 +mySubscribtionSpecialData.getImage() ).into(imageView);
         //Toast.makeText(getContext(), "http://dietfoodksa.com/site"+mySubscribtionSpecialData.getImage(), Toast.LENGTH_LONG).show();
        // Typeface customFontMedium = Typeface.createFromAsset(getContext().getAssets(), "Fonts/SST Arabic Medium.ttf");

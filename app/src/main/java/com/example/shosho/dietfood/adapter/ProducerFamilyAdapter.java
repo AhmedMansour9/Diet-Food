@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -46,8 +47,15 @@ public class ProducerFamilyAdapter extends RecyclerView.Adapter<ProducerFamilyAd
         Typeface customFontRegular = Typeface.createFromAsset( context.getAssets(), "Fonts/Cairo-Regular.ttf" );
         holder.name.setTypeface( customFontMedium );
 
-        holder.price.setText(producerFamilyDataList.get( position ).getPrice()+" SR");
-        holder.price.setTypeface( customFontRegular );
+        if(Integer.parseInt(producerFamilyDataList.get( position ).getPrice())==0){
+
+            holder.relatii.setVisibility(View.GONE);
+        }else {
+            holder.price.setText(producerFamilyDataList.get(position).getPrice() + " SR");
+            holder.price.setTypeface( customFontRegular );
+        }
+
+
 
 
         Glide.with( context ).load( "http://dietfoodksa.com/site"+producerFamilyDataList.get( position ).getImage())
@@ -86,7 +94,7 @@ public class ProducerFamilyAdapter extends RecyclerView.Adapter<ProducerFamilyAd
         private ImageView imageView;
         private TextView name;
         private TextView price;
-
+        private RelativeLayout relatii;
 
         public ViewHolder(View itemView) {
             super( itemView );
@@ -94,7 +102,7 @@ public class ProducerFamilyAdapter extends RecyclerView.Adapter<ProducerFamilyAd
             name=itemView.findViewById( R.id.row_prod_family_title );
             price=itemView.findViewById( R.id.row_prod_family_price );
 
-
+            relatii=itemView.findViewById(R.id.relatii);
         }
     }
 }

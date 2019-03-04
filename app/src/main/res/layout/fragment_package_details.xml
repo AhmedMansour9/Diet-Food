@@ -4,9 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
-    android:clickable="true"
-
-    tools:context=".fragment.PackageDetailsFragment">
+    android:clickable="true">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -94,11 +92,11 @@
             android:id="@+id/package_details_prod_details"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#c8c8c8"
             android:layout_below="@+id/package_details"
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/_12sdp"
             android:layout_marginTop="@dimen/_7sdp"
+            android:textColor="#000"
             />
         <Button
             android:id="@+id/package_details_btn_subscribe"

@@ -78,9 +78,7 @@ public class CardFragment extends Fragment implements CardView ,AddToCardView
     SharedPreferences sharedPref;
     public static String Login;
     public CardFragment() {
-        // Required empty public constructor
     }
-
     View view;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -107,7 +105,6 @@ public class CardFragment extends Fragment implements CardView ,AddToCardView
         swipRefresh();
         return view;
     }
-
     private void swipRefresh() {
         swipeRefreshLayout.setColorSchemeResources( android.R.color.holo_green_dark );
         swipeRefreshLayout.setEnabled( true );
@@ -144,19 +141,12 @@ public class CardFragment extends Fragment implements CardView ,AddToCardView
             TotalPrice += cardDataList.get( i ).getTotalPrice() ;
         }
         textTotalPrice.setText(String.valueOf(  TotalPrice)  );*/
-        if(Language.isRTL()) {
             TabLayout.Tab tab = HomeActivity.tabLayout.getTabAt(2); // fourth tab
             View tabView = tab.getCustomView();
             TextView textView = tabView.findViewById(R.id.cart_notification);
             textView.setVisibility(View.VISIBLE);
             textView.setText(cardDataList.size() + "");
-        }else {
-            TabLayout.Tab tab = HomeActivity.tabLayout.getTabAt(1); // fourth tab
-            View tabView = tab.getCustomView();
-            TextView textView = tabView.findViewById(R.id.cart_notification);
-            textView.setVisibility(View.VISIBLE);
-            textView.setText(cardDataList.size() + "");
-        }
+
 
            cardAdapter = new CardAdapter(getContext(), cardDataList);
            cardAdapter.onClick((DetailsCardView) this);
@@ -168,37 +158,26 @@ public class CardFragment extends Fragment implements CardView ,AddToCardView
            totalPricerelativeLayout.setVisibility(View.VISIBLE);
            paymentBtn.setVisibility(View.VISIBLE);
            swipeRefreshLayout.setRefreshing(false);
-
-
     }
 
     @Override
     public void showPrice(String price) {
         TotalPrice=price;
         textTotalPrice.setText( price);
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     @Override
     public void showEmptyCard() {
         totalPricerelativeLayout.setVisibility(View.GONE);
         paymentBtn.setVisibility(View.GONE);
-
-        if(Language.isRTL()) {
+        swipeRefreshLayout.setRefreshing(false);
 
             TabLayout.Tab tab = HomeActivity.tabLayout.getTabAt(2); // fourth tab
             View tabView = tab.getCustomView();
             TextView textView = tabView.findViewById(R.id.cart_notification);
             textView.setVisibility(View.GONE);
 
-        }else {
-
-            TabLayout.Tab tab = HomeActivity.tabLayout.getTabAt(1); // fourth tab
-            View tabView = tab.getCustomView();
-            TextView textView = tabView.findViewById(R.id.cart_notification);
-            textView.setVisibility(View.GONE);
-
-
-        }
 
 
     }
@@ -210,6 +189,11 @@ public class CardFragment extends Fragment implements CardView ,AddToCardView
         double price=Double.parseDouble(TotalPrice);
         int Price=(int)price;
         bundle.putString( "totalPrice",String.valueOf(Price));
+        bundle.putString( "check","order");
+        bundle.putString( "name",null);
+        bundle.putString( "email",null);
+        bundle.putString( "phone",null);
+        bundle.putString( "msg",null);
         postOrderFragment.setArguments(bundle);
         getFragmentManager().beginTransaction().replace(R.id.card_frame_container
                 ,postOrderFragment).addToBackStack(null).commit();

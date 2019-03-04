@@ -7,11 +7,22 @@ import android.support.annotation.Nullable;
 
 
 import com.dietfoooood.R;
+import com.example.shosho.dietfood.SplashActivity;
 import com.example.shosho.dietfood.common.Constants;
+import com.example.shosho.dietfood.fragment.PackageDetailsFragment;
+import com.example.shosho.dietfood.fragment.PostOrderFragment;
+import com.example.shosho.dietfood.model.PostOrderData;
+import com.example.shosho.dietfood.model.User;
+import com.example.shosho.dietfood.presenter.PaidConsultationPresenter;
+import com.example.shosho.dietfood.presenter.PostOrderPresenter;
+import com.example.shosho.dietfood.presenter.SubscribtionPresenter;
 import com.example.shosho.dietfood.task.CheckoutIdRequestAsyncTask;
 import com.example.shosho.dietfood.task.CheckoutIdRequestListener;
 import com.example.shosho.dietfood.task.PaymentStatusRequestAsyncTask;
 import com.example.shosho.dietfood.task.PaymentStatusRequestListener;
+import com.example.shosho.dietfood.view.PaidConsultationView;
+import com.example.shosho.dietfood.view.PostOrderView;
+import com.example.shosho.dietfood.view.SubscribtionView;
 import com.oppwa.mobile.connect.checkout.dialog.CheckoutActivity;
 import com.oppwa.mobile.connect.checkout.meta.CheckoutSettings;
 import com.oppwa.mobile.connect.checkout.meta.CheckoutSkipCVVMode;
@@ -26,16 +37,19 @@ import com.oppwa.mobile.connect.provider.TransactionType;
  */
 @SuppressLint("Registered")
 public class BasePaymentActivity extends BaseActivity
-        implements CheckoutIdRequestListener, PaymentStatusRequestListener {
+        implements PaidConsultationView, PostOrderView, SubscribtionView, CheckoutIdRequestListener, PaymentStatusRequestListener {
 
     private static final String STATE_RESOURCE_PATH = "STATE_RESOURCE_PATH";
-
+    PaidConsultationPresenter paidConsultationPresenter;
+    SubscribtionPresenter subscribtionPresenter;
     protected String resourcePath;
-
+    PostOrderPresenter postOrderPresenter;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        postOrderPresenter=new PostOrderPresenter(getBaseContext(),this);
+        paidConsultationPresenter=new PaidConsultationPresenter(getBaseContext(),this);
+        subscribtionPresenter=new SubscribtionPresenter( getBaseContext(),this );
         if (savedInstanceState != null) {
             resourcePath = savedInstanceState.getString(STATE_RESOURCE_PATH);
         }
@@ -141,11 +155,39 @@ public class BasePaymentActivity extends BaseActivity
 
     @Override
     public void onPaymentStatusReceived(String paymentStatus) {
-        hideProgressDialog();
+
 
         if ("000.100.112".equals(paymentStatus)) {
-            showAlertDialog(R.string.message_successful_payment);
-            return;
+
+
+            if(PostOrderFragment.Tybe.equals("order")){
+                User user=new User();
+                user.setUserToken(SplashActivity.Login);
+                user.setPhone(PostOrderFragment.Phone);
+
+                postOrderPresenter.getPostOrder(user);
+                return;
+
+            }else if(PostOrderFragment.Tybe.equals("eshtrak")){
+                subscribtionPresenter.getSubscribtionResult( SplashActivity.Login, PackageDetailsFragment.Id);
+           return;
+            }
+            else if(PostOrderFragment.Tybe.equals("esteshara")){
+
+                User user=new User();
+                user.setName(PostOrderFragment.Name);
+                user.setPhone(PostOrderFragment.Phone);
+                user.setEmail(PostOrderFragment.Email);
+                user.setMsg(PostOrderFragment.Msg);
+                paidConsultationPresenter.getPaidConsultationResult(user);
+             return;
+
+            }
+
+
+
+
+//            return;
         }
 
 //        if ("Transaction succeeded".equals(paymentStatus)) {
@@ -203,9 +245,51 @@ public class BasePaymentActivity extends BaseActivity
      */
     protected CheckoutSettings createCheckoutSettings(String checkoutId, String callbackScheme) {
         return new CheckoutSettings(checkoutId, Constants.Config.PAYMENT_BRANDS,
-                Connect.ProviderMode.TEST)
+                Connect.ProviderMode.LIVE)
                 .setSkipCVVMode(CheckoutSkipCVVMode.FOR_STORED_CARDS)
                 .setWindowSecurityEnabled(false)
                 .setShopperResultUrl(callbackScheme + "://callback");
+    }
+
+    @Override
+    public void showPostOrderResult(PostOrderData postOrderData) {
+        hideProgressDialog();
+        Intent inty=new Intent(getBaseContext(), RequestedOrderSuccessfully.class);
+        inty.putExtra("price",String.valueOf(postOrderData.getTotal()));
+        inty.putExtra("id",String.valueOf(postOrderData.getOrderId()));
+        startActivity(inty);
+      finish();
+
+    }
+
+    @Override
+    public void showPostOrderRe(String message) {
+
+
+    }
+
+    @Override
+    public void showPaidConsultationResult(String Msg) {
+        hideProgressDialog();
+        Intent inty=new Intent(getBaseContext(), RequestedSucess.class);
+        inty.putExtra("message","تم ارسال استشارتك بنجاح");
+        startActivity(inty);
+
+        finish();
+
+    }
+
+    @Override
+    public void showSubscribtionResult(String Message) {
+        hideProgressDialog();
+        Intent inty=new Intent(getBaseContext(), RequestedSucess.class);
+        inty.putExtra("message","تم الاشتراك بالباقة بنجاح");
+        startActivity(inty);
+        finish();
+    }
+
+    @Override
+    public void showError() {
+
     }
 }

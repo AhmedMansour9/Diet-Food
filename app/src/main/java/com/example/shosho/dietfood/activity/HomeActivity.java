@@ -66,12 +66,8 @@ public class HomeActivity extends AppCompatActivity implements CardView {
       cardPresenter=new CardPresenter(this,this);
       cardPresenter.getCardList(UserToken);
         setupTabIcons();
+         tabLayout.getTabAt(3).select();
 
-        if(Language.isRTL()) {
-            tabLayout.getTabAt(3).select();
-        }else {
-            tabLayout.getTabAt(0).select();
-        }
 
     }
 
@@ -85,18 +81,12 @@ public class HomeActivity extends AppCompatActivity implements CardView {
         View view4=getLayoutInflater().inflate( R.layout.tab_icon_profile,null );
 
 
-        if(Language.isRTL()){
             tabLayout.getTabAt(0).setCustomView(view4);
             tabLayout.getTabAt(1).setCustomView(view3);
             tabLayout.getTabAt(2).setCustomView(view2);
             tabLayout.getTabAt(3).setCustomView(view1);
-        }else {
-            tabLayout.getTabAt( 0 ).setCustomView( view1 );
-            tabLayout.getTabAt( 1 ).setCustomView( view2 );
-            tabLayout.getTabAt( 2 ).setCustomView( view3 );
-            tabLayout.getTabAt( 3).setCustomView( view4 );
+
         }
-    }
     public void onSelectedTab(){
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -109,6 +99,24 @@ public class HomeActivity extends AppCompatActivity implements CardView {
                         fm.popBackStack();
                     }
                 }
+                if(SplashActivity.Login==null){
+                    int postion=tab.getPosition();
+                        if (postion == 1) {
+                            startActivity(new Intent(HomeActivity.this, LoginActivity.class));
+                            finish();
+                        }
+                        if (postion == 2) {
+                            startActivity(new Intent(HomeActivity.this, LoginActivity.class));
+                            finish();
+                        }
+                        if (postion == 0) {
+                            startActivity(new Intent(HomeActivity.this, LoginActivity.class));
+                            finish();
+                        }
+
+                }
+
+
 //                switch(tab.getPosition()) {
                 viewPager.setCurrentItem(tab.getPosition());
             }
@@ -133,20 +141,11 @@ public class HomeActivity extends AppCompatActivity implements CardView {
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter viewPagerAdapter=new ViewPagerAdapter(getSupportFragmentManager());
 
-
-        if(Language.isRTL()){
-            viewPagerAdapter.addFrag( new ProfileFragment(),"" );
+         viewPagerAdapter.addFrag( new ProfileFragment(),"" );
             viewPagerAdapter.addFrag( new MyOrdersFragment(),"" );
             viewPagerAdapter.addFrag( new CardFragment(),"" );
             viewPagerAdapter.addFrag( new HomeFragment(),"" );
 
-        }else {
-            viewPagerAdapter.addFrag( new HomeFragment(),"" );
-            viewPagerAdapter.addFrag( new CardFragment(),"" );
-            viewPagerAdapter.addFrag( new MyOrdersFragment(),"" );
-            viewPagerAdapter.addFrag( new ProfileFragment(),"" );
-
-        }
         viewPager.setAdapter( viewPagerAdapter );
     }
 
@@ -158,19 +157,11 @@ public class HomeActivity extends AppCompatActivity implements CardView {
 
     @Override
     public void showCardList(List<CardData> cardDataList) {
-        if(Language.isRTL()) {
             TabLayout.Tab tab = HomeActivity.tabLayout.getTabAt(2); // fourth tab
             View tabView = tab.getCustomView();
             TextView textView = tabView.findViewById(R.id.cart_notification);
             textView.setVisibility(View.VISIBLE);
             textView.setText(cardDataList.size() + "");
-        }else {
-            TabLayout.Tab tab = HomeActivity.tabLayout.getTabAt(1); // fourth tab
-            View tabView = tab.getCustomView();
-            TextView textView = tabView.findViewById(R.id.cart_notification);
-            textView.setVisibility(View.VISIBLE);
-            textView.setText(cardDataList.size() + "");
-        }
     }
 
     @Override
