@@ -157,75 +157,46 @@ public class BasePaymentActivity extends BaseActivity
     public void onPaymentStatusReceived(String paymentStatus) {
 
 
-        if ("000.100.112".equals(paymentStatus)) {
-
-
-            if(PostOrderFragment.Tybe.equals("order")){
-                User user=new User();
-                user.setUserToken(SplashActivity.Login);
-                user.setPhone(PostOrderFragment.Phone);
-
-                postOrderPresenter.getPostOrder(user);
-                return;
-
-            }else if(PostOrderFragment.Tybe.equals("eshtrak")){
-                subscribtionPresenter.getSubscribtionResult( SplashActivity.Login, PackageDetailsFragment.Id);
-           return;
-            }
-            else if(PostOrderFragment.Tybe.equals("esteshara")){
-
-                User user=new User();
-                user.setName(PostOrderFragment.Name);
-                user.setPhone(PostOrderFragment.Phone);
-                user.setEmail(PostOrderFragment.Email);
-                user.setMsg(PostOrderFragment.Msg);
-                paidConsultationPresenter.getPaidConsultationResult(user);
-             return;
-
-            }
-
-
-
-
-//            return;
+        if ("000.000.000".equals(paymentStatus)) {
+               Order();
         }
 
-//        if ("Transaction succeeded".equals(paymentStatus)) {
-//            showAlertDialog(R.string.message_successful_payment);
-//            return;
-//        }
-//        if ("successful request".equals(paymentStatus)) {
-//            showAlertDialog(R.string.message_successful_payment);
-//            return;
-//        }
-//        if ("Request successfully processed in 'Merchant in Integrator Test Mode".equals(paymentStatus)) {
-//            showAlertDialog(R.string.message_successful_payment);
-//            return;
-//        }
-//        if ("Request successfully processed in 'Merchant in Validator Test Mode".equals(paymentStatus)) {
-//            showAlertDialog(R.string.message_successful_payment);
-//            return;
-//        }
-//        if ("Request successfully processed in 'Merchant in Connector Test Mode".equals(paymentStatus)) {
-//            showAlertDialog(R.string.message_successful_payment);
-//            return;
-//        }
-//        if ("Two-step transaction succeeded".equals(paymentStatus)) {
-//            showAlertDialog(R.string.message_successful_payment);
-//            return;
-//        }
-//        if ("Risk check successful".equals(paymentStatus)) {
-//            showAlertDialog(R.string.message_successful_payment);
-//            return;
-//        }
-//        if ("Risk report successful".equals(paymentStatus)) {
-//            showAlertDialog(R.string.message_successful_payment);
-//            return;
-//        }
-//        if ("transaction succeeded due to external update".equals(paymentStatus)) {
-//            showAlertDialog(R.string.message_successful_payment);
-//            return;
-//        }
+        if ("000.000.100".equals(paymentStatus)) {
+            Order();
+            return;
+        }
+        if ("000.100.110".equals(paymentStatus)) {
+            Order();
+            return;
+        }
+        if ("000.100.111".equals(paymentStatus)) {
+            Order();
+            return;
+        }
+        if ("000.100.112".equals(paymentStatus)) {
+            Order();
+            return;
+        }
+        if ("000.300.000".equals(paymentStatus)) {
+            Order();
+            return;
+        }
+        if ("000.300.100".equals(paymentStatus)) {
+            Order();
+            return;
+        }
+        if ("000.300.101".equals(paymentStatus)) {
+            Order();
+            return;
+        }
+        if ("000.300.102".equals(paymentStatus)) {
+            Order();
+            return;
+        }
+        if ("000.600.000".equals(paymentStatus)) {
+            Order();
+            return;
+        }
 
 
             showAlertDialog(R.string.message_unsuccessful_payment);
@@ -290,6 +261,35 @@ public class BasePaymentActivity extends BaseActivity
 
     @Override
     public void showError() {
+
+    }
+
+    public  void Order(){
+
+
+        if(PostOrderFragment.Tybe.equals("order")){
+            User user=new User();
+            user.setUserToken(SplashActivity.Login);
+            user.setPhone(PostOrderFragment.Phone);
+
+            postOrderPresenter.getPostOrder(user);
+            return;
+
+        }else if(PostOrderFragment.Tybe.equals("eshtrak")){
+            subscribtionPresenter.getSubscribtionResult( SplashActivity.Login, PackageDetailsFragment.Id);
+            return;
+        }
+        else if(PostOrderFragment.Tybe.equals("esteshara")){
+
+            User user=new User();
+            user.setName(PostOrderFragment.Name);
+            user.setPhone(PostOrderFragment.Phone);
+            user.setEmail(PostOrderFragment.Email);
+            user.setMsg(PostOrderFragment.Msg);
+            paidConsultationPresenter.getPaidConsultationResult(user);
+            return;
+
+        }
 
     }
 }

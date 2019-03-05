@@ -70,9 +70,9 @@ public class PaymentStatusRequestAsyncTask extends AsyncTask<String, Void, Strin
         try {
             urlString = Constants.BASE_URL + "/paymentId?" +
                     "id=" + CheckoutIdRequestAsyncTask.checkoutId+
-                    "&userId=" + "8ac7a4c8686138d701686fad36ce11a4" +
-                    "&password=" + "kejWhw4yhN" +
-                    "&entityId=" +"8ac7a4c8686138d701686fad698011ae";
+                    "&userId=" + "8ac9a4cd692f246501694ccd3abb7430" +
+                    "&password=" + "ZFxK6fwedD" +
+                    "&entityId=" +"8ac9a4cd692f246501694ccd85ab7436";
             url = new URL(urlString);
             connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");

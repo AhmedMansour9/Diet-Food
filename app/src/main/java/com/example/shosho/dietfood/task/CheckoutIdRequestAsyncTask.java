@@ -59,9 +59,9 @@ public class CheckoutIdRequestAsyncTask extends AsyncTask<String, Void, String> 
                 "&notificationUrl=http://52.59.56.185:80/notification";*/
         String urlString = Constants.BASE_URL + "/checkout?" +
                 "amount=" + amount +
-                "&userId=" + "8ac7a4c8686138d701686fad36ce11a4" +
-                "&password=" + "kejWhw4yhN" +
-                "&entityId=" +"8ac7a4c8686138d701686fad698011ae"
+                "&userId=" + "8ac9a4cd692f246501694ccd3abb7430" +
+                "&password=" + "ZFxK6fwedD" +
+                "&entityId=" +"8ac9a4cd692f246501694ccd85ab7436"
               + "&user_token=" + SplashActivity.Login;
         URL url;
         HttpURLConnection connection = null;
